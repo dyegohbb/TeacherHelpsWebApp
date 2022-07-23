@@ -4,7 +4,7 @@ import { ProfessorFormComponent } from './professores/professor-form/professor-f
 import { ProfessorListComponent } from './professores/professor-list/professor-list.component';
 
 const routes: Routes = [
-  { path: 'professores', component: ProfessorListComponent},
+  { path: '', component: ProfessorListComponent},
   { path: 'professores/add', component: ProfessorFormComponent }
 ];
 
