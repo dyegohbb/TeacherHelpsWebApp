@@ -2,6 +2,19 @@ body{
     background-color: #CCCCFF !important;
 }
 
+.t-header{
+  display: flex;
+  box-sizing: border-box;
+  background-color: red;
+  min-width: 100%;
+  min-height: 4rem;
+  max-height: 4rem;
+  align-items: center;
+  align-content: center;
+}
+
+
+
 
 .hoverable{
     display:inline-block;

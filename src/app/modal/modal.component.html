@@ -1,0 +1,26 @@
+<div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">{{ professor.nome }}</h5>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modalRef.close()"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <div class="d-flex flex-column align-items-center justify-content-center">
+        <p>Sobre: {{ professor.sobre }}</p>
+        <p>Disciplina: {{ professor.disciplina }}</p>
+        <p>E-mail: {{ professor.email }}</p>
+        <p>Valor: $C {{ professor.valorPorHora }}/h</p>
+    </div>
+    <div class="d-flex flex-column align-items-center justify-content-center">
+        <p>Disponibilidade:</p>
+        <span *ngFor="let disponibilidade of disp"><a (click)="agendar(professor, disponibilidade)">{{ disponibilidade.dataInicio }} ~ {{ disponibilidade.dataFim }}</a></span>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modalRef.close()">
+      Close
+    </button>
+  </div>

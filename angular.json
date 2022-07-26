@@ -92,7 +92,10 @@
             "styles": [
               "src/styles.css"
           ],
-            "scripts": ["src/styles.js"]
+            "scripts": [
+              "src/styles.js",
+              "../node_modules/jquery/dist/jquery.min.js"
+            ]
           }
         }
       }
