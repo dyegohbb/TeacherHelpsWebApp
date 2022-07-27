@@ -1,1 +1,28 @@
-<p>cadastro works!</p>
+<div class="container d-flex justify-content-around">
+  <div class="cadastro mt-5 ms-5">
+    <div class="card min-width-perso">
+        <div class="card-body">
+          <h5 class="card-title">Cadastre-se como Aluno</h5>
+          <p class="card-text">
+            Se você busca conhecimento, aqui é o local certo!
+          </p>
+          <div class="miudas">
+            <p>*receba um bônus de $C ao concluir o cadastro</p>
+          </div>
+          <a href="#" class="btn btn-primary" (click)="goTo('/cadastro/aluno')">Cadastrar</a>
+        </div>
+      </div>
+  </div>
+  <div class="v-line"></div>
+  <div class="cadastro mt-5 me-5">
+    <div class="card min-width-perso">
+      <div class="card-body">
+        <h5 class="card-title">Cadastre-se como Professor</h5>
+        <p class="card-text">
+          Receba um extra fazendo oque ama, ensinando!
+        </p>
+        <a href="#" class="btn btn-primary" (click)="goTo('/cadastro/aluno')">Cadastrar</a>
+      </div>
+    </div>
+  </div>
+</div>

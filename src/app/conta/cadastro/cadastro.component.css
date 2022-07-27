@@ -1,0 +1,14 @@
+.v-line{
+    border-left: thin solid rgba(22, 22, 22, 0.705);
+    height:55%;
+    top: 22rem;
+    position: absolute;
+   }
+.min-width-perso{
+    min-width: 30rem;
+}
+.miudas{
+    font-size: 12px;
+    text-align: end;
+    float: right;
+}
