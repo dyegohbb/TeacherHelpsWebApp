@@ -15,7 +15,6 @@ export class AppComponent implements OnInit {
   constructor(private localStorageService: LocalStorageService, private router : Router, private _sharedService: CompartilhadoService) {
     _sharedService.changeEmitted$.subscribe(text => {
       if(text == "isLogado"){
-        console.log("abacate?")
         this.isLogado = true;
       }
   });

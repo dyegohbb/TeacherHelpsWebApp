@@ -1,12 +1,12 @@
 export interface Professor {
     dataDeCadastro: Date;
-    cpf:number;
+    cpf:string;
     nome:string;
     disciplina:string;
     disponibilidade:any[];
     email:string;
     endereco:any;
     sobre:string;
-    telefone:number;
+    telefone:string;
     valorPorHora:number;     
 }

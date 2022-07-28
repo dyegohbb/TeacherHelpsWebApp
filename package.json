@@ -23,6 +23,7 @@
     "jquery": "^3.6.0",
     "mdb-angular-ui-kit": "^2.3.0",
     "ng2-bs3-modal": "^0.15.0",
+    "ngx-mask": "^14.0.3",
     "pusher-js": "^7.3.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
