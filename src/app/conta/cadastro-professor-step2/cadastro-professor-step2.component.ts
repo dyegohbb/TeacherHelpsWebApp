@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { LocalStorageService } from 'src/app/local-storage.service';
+import { ProfessorService } from 'src/app/professores/professor/professor.service';
 
 @Component({
   selector: 'app-cadastro-professor-step2',
@@ -11,17 +12,35 @@ export class CadastroProfessorStep2Component implements OnInit {
   disciplinasPure: any;
   disciplinas: any;
   professor: any;
+  horaInicial: any;
+  disponibilidades: any[]=[];
+  horaFinal: any;
   senha: any;
-  constructor(private localStorageService: LocalStorageService, private http: HttpClient,) {}
-
+  constructor(private localStorageService: LocalStorageService, private http: HttpClient, private professorService: ProfessorService) {}
+  
    salvar(){
-    console.log(this.professor)
-    console.log(this.senha)
+    this.professor.disponibilidades = this.disponibilidades,
+    this.professor.senha = this.senha
+    // let prof = JSON.stringify(this.professor)
+    this.professorService.save(this.professor).subscribe(professor => console.log(professor));
+   }
+
+   adicionarDisponibilidade(){
+    if(this.horaInicial != null && this.horaFinal != null){
+      this.disponibilidades.push({
+        dataInicio: this.horaInicial,
+        dataFim: this.horaFinal
+      })
+    }
+   }
+
+   removerDisponibilidade(disponibilidade : any){
+    let tempDisp = this.disponibilidades.filter( (disp) => disp !== disponibilidade)
+    this.disponibilidades = tempDisp;
    }
 
    fetchDisciplinas(){
     this.disciplinas = Object.values(this.disciplinasPure)
-    console.log(this.disciplinas)
    }
 
 
@@ -31,11 +50,9 @@ export class CadastroProfessorStep2Component implements OnInit {
       this.fetchDisciplinas()
       })
     
-    let professor = JSON.parse(this.localStorageService.get("infoCadastroProfessor"));
-    console.log(professor)
+    this.professor = JSON.parse(this.localStorageService.get("infoCadastroProfessor"));
 
-    let senha = this.localStorageService.get("infoCadastroSenha");
-    console.log(senha)
+    this.senha = this.localStorageService.get("infoCadastroSenha");
   }
 
 }

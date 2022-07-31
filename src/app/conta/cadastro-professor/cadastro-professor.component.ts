@@ -19,7 +19,7 @@ export class CadastroProfessorComponent implements OnInit {
     cpf: "",
     nome: "",
     disciplina: "",
-    disponibilidade: [],
+    disponibilidades: [],
     email: "",
     endereco: {},
     sobre: "",
@@ -31,7 +31,7 @@ export class CadastroProfessorComponent implements OnInit {
   proximo(){
     let professorString = JSON.stringify(this.professor);
     this.localStorageService.set("infoCadastroProfessor", professorString)
-    this.localStorageService.set("infoCadastroSenha", professorString)
+    this.localStorageService.set("infoCadastroSenha", this.senha)
     this.router.navigate(['/cadastro/professor/continue'])
   }
 

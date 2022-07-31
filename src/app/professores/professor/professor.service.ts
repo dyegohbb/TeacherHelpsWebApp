@@ -18,4 +18,9 @@ export class ProfessorService {
                     'Authorization': this.localStorageService.get("tokenType") + this.localStorageService.get("token")}
             });       
     }
+    
+    save(professor: any) {
+        return this.http
+            .post(API + '/professor', {professor});       
+    }
 }

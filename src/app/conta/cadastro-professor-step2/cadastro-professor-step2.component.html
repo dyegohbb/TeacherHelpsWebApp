@@ -1,27 +1,93 @@
 <div class="d-flex justify-content-center">
-    <form class="mt-3" (ngSubmit)="salvar()">
+  <form class="mt-3" (ngSubmit)="salvar()">
+    <div class="d-flex justify-content-center">
+      <h5>Digite um pouco sobre você:</h5>
+    </div>
+    <div class="d-flex justify-content-center">
+      <label class="inp m-2 inp-nome" for="sobre">
+        <textarea
+          name="sobre"
+          id="sobre"
+          cols="50"
+          type="text"
+          aria-describedby="emailHelp"
+          placeholder="Sobre"
+          [(ngModel)]="professor.sobre"
+        ></textarea>
+        <span class="focus-bg"></span>
+      </label>
+    </div>
+
+    <div class="d-flex justify-content-center align-items-center flex-column mt-3">
         <div class="d-flex justify-content-center">
-            <h5>Digite um pouco sobre você: </h5>
+            <h5>Valor das aulas:</h5>
+          </div>
+      <label class="inp m-1" for="valorPorHora">
+        <input
+          name="valorPorHora"
+          [(ngModel)]="professor.valorPorHora"
+          id="valorPorHora"
+          type="text"
+        />
+        <span class="label">$C por hora:</span>
+        <span class="focus-bg"></span>
+      </label>
+    </div>
+
+    <div class="d-flex justify-content-center flex-column mt-3">
+        <div class="d-flex justify-content-center">
+            <h5>Disponibilidade:</h5>
         </div>
-        <div class="d-flex justify-content-center">
-            <label class="inp m-4 inp-nome" for="nome">
-                <textarea name="nome" id="nome" cols="50" type="nome" aria-describedby="emailHelp"
-                    placeholder="Sobre"></textarea>
-                <span class="focus-bg"></span>
-            </label>
+        <div *ngFor="let disponibilidade of disponibilidades" class="d-flex flex-row justify-content-between">
+            <p>{{disponibilidade.dataInicio}}</p> ~ <p>{{disponibilidade.dataFim}} </p> <a class="proximo me-4" (click)="removerDisponibilidade(disponibilidade)">remove</a>
         </div>
 
-        <label for="cars">Choose a car:</label>
-            <select name="cars" id="cars">
-                <option *ngFor="let disciplina of disciplinas" [value]="disciplina">{{disciplina}}</option>
-            </select>
-        <div class="d-flex justify-content-end">
-            <button class="proximo me-4">
+        <div class="d-flex flex-row justify-content-between">
+            <label class="inp m-1" for="horaInicial">
+                <input
+                  name="horaInicial"
+                  [(ngModel)]="horaInicial"
+                  id="horainicial"
+                  type="datetime-local"
+                />
+                <span class="label">Hora inicial:</span>
+                <span class="focus-bg"></span>
+              </label>
+              <label class="inp m-1" for="horaFinal">
+                <input
+                  name="horaFinal"
+                  [(ngModel)]="horaFinal"
+                  id="horaFinal"
+                  type="datetime-local"
+                />
+                <span class="label">Hora final:</span>
+                <span class="focus-bg"></span>
+              </label>
+              <a class="proximo me-4" (click)="adicionarDisponibilidade()">
                 <span class="circle" aria-hidden="true">
-                    <span class="icon arrow"></span>
+                  <span class="icon arrow"></span>
                 </span>
-                <span class="button-text">Avançar</span>
-            </button>
+                <span class="button-text">add</span>
+            </a>
         </div>
-    </form>
+        
+      </div>
+
+    <div class="d-flex flex-column justify-content-center mt-3">
+      <label for="cars">Escolha sua disciplina:</label>
+      <select name="cars" id="cars" class="mt-1"[(ngModel)]="professor.disciplina">
+        <option *ngFor="let disciplina of disciplinas" [value]="disciplina">
+          {{ disciplina }}
+        </option>
+      </select>
+      <div class="d-flex justify-content-end mt-4">
+        <button class="proximo me-4">
+          <span class="circle" aria-hidden="true">
+            <span class="icon arrow"></span>
+          </span>
+          <span class="button-text">Cadastrar</span>
+        </button>
+      </div>
+    </div>
+  </form>
 </div>

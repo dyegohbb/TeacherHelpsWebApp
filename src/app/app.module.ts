@@ -10,6 +10,7 @@ import { ModalComponent } from './modal/modal.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CompartilhadoService } from './compartilhado.service';
+import { AlunosModule } from './alunos/alunos.module';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { CompartilhadoService } from './compartilhado.service';
     SobreModule,
     ContaModule,
     FormsModule,
+    AlunosModule
   ],
   providers: [CompartilhadoService],
   bootstrap: [AppComponent]

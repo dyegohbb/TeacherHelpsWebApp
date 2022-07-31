@@ -3,7 +3,7 @@ export interface Professor {
     cpf:string;
     nome:string;
     disciplina:string;
-    disponibilidade:any[];
+    disponibilidades:any[];
     email:string;
     endereco:any;
     sobre:string;

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AlunoService } from 'src/app/alunos/aluno/aluno.service';
 
 @Component({
   selector: 'app-cadastro-aluno',
@@ -7,7 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CadastroAlunoComponent implements OnInit {
 
-  constructor() { }
+  constructor(private alunoService: AlunoService) { }
+
+  aluno: any = {
+    nome: "",
+    email: "",
+    senha: "",
+    cpf: "",
+    telefone: "",
+  };
+
+
+  salvar(){
+    console.log(this.aluno);
+    this.alunoService.save(this.aluno).subscribe((aluno: any) => console.log(aluno));
+  }
 
   ngOnInit(): void {
   }
