@@ -14,7 +14,7 @@
         <p>E-mail: {{ professor.email }}</p>
         <p>Valor: $C {{ professor.valorPorHora }}/h</p>
     </div>
-    <div class="d-flex flex-column align-items-center justify-content-center">
+    <div *ngIf="isAlunoLogado" class="d-flex flex-column align-items-center justify-content-center">
         <p>Disponibilidade:</p>
         <span *ngFor="let disponibilidade of disp"><a (click)="agendar(professor, disponibilidade)">{{ disponibilidade.dataInicio }} ~ {{ disponibilidade.dataFim }}</a></span>
     </div>

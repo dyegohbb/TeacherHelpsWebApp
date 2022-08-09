@@ -13,10 +13,7 @@ export class ProfessorService {
 
     list() {
         return this.http
-            .get<Professor[]>(API + '/professor', {
-                headers: {
-                    'Authorization': this.localStorageService.get("tokenType") + this.localStorageService.get("token")}
-            });       
+            .get<Professor[]>(API + '/professor');       
     }
     
     save(professor: any) {

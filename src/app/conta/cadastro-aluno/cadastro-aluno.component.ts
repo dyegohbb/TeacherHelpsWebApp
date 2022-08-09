@@ -20,8 +20,7 @@ export class CadastroAlunoComponent implements OnInit {
 
 
   salvar(){
-    console.log(this.aluno);
-    this.alunoService.save(this.aluno).subscribe((aluno: any) => console.log(aluno));
+    this.alunoService.save(this.aluno).subscribe();
   }
 
   ngOnInit(): void {

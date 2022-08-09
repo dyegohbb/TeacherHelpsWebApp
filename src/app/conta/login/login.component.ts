@@ -38,7 +38,11 @@ export class LoginComponent implements OnInit {
           this.localStorageService.set('token', data.token);
           this.localStorageService.set('tokenType', 'Bearer ');
           this.localStorageService.set('tokenExpiration', date.toISOString());
+          this.localStorageService.set('type', data.type);
+          this.localStorageService.set('pessoaID', data.id);
+          this.localStorageService.set('isLogado', "true");
           this._sharedService.emitChange("isLogado");
+          this._sharedService.emitChange(data.type);
           this.router.navigate(["/"])
         });
     }

@@ -1,0 +1,42 @@
+<div style="min-height: 20rem; width: 50rem; " class="album mt-4 container d-flex justify-content-between">
+    <div class="container">
+        <div class="d-flex column justify-content-center" *ngIf="semDados">
+            <h5>Nenhuma disponibilidade cadastrada.</h5>
+        </div>
+        <div class="d-flex column justify-content-center">
+            <h6>Qualquer alteração feita tem que ser salva</h6>
+        </div>
+        <div class="d-flex row justify-content-center">
+            <div class="row overflow-auto" style="height: 30rem; width: 25rem">
+                <div *ngFor="let disponibilidade of disponibilidades">
+                    <span>{{ disponibilidade.dataInicio }} ~ {{ disponibilidade.dataFim }}</span>
+                </div>
+            </div>
+            <div class="d-flex flex-row justify-content-center">
+            <label class="inp m-1" for="horaInicial">
+                <input
+                  name="horaInicial"
+                  [(ngModel)]="horaInicial"
+                  id="horainicial"
+                  type="datetime-local"
+                  min="{{dataMin}}"
+                />
+                <span class="label">Hora inicial:</span>
+                <span class="focus-bg"></span>
+              </label>
+        </div>
+            <div class="d-flex column justify-content-center align-items-center mt-3" style="text-align: center;">
+                <div class="me-1" style="border: solid thin; min-width: 15rem; padding: 0.3rem; padding-right: 0.5rem;" (click)="adicionarDisponibilidade()">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"></path><path fill="currentColor" d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z"></path></svg>
+                    <span id="text-add">Adicionar disponibilidade</span>
+                </div>
+                <div (click)="enviarDisponibilidades()" class="ms-1" style="border: solid thin; min-width: 15rem; padding: 0.3rem; padding-right: 0.5rem;">
+                    <img class="me-1" src="https://img.icons8.com/external-yogi-aprelliyanto-basic-outline-yogi-aprelliyanto/64/000000/external-save-design-thinking-yogi-aprelliyanto-basic-outline-yogi-aprelliyanto.png" width="24" height="24"/>
+                    <span id="text-add">Salvar disponibilidades</span>
+                </div>
+            </div>
+            
+        </div>
+        
+    </div>
+</div>

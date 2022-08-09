@@ -1,6 +1,9 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { data } from 'jquery';
 import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
+import { LocalStorageService } from '../local-storage.service';
 import { Professor } from '../professores/professor/professor';
 
 
@@ -13,20 +16,34 @@ export class ModalComponent implements OnInit {
   disponibilidades: any[] = [];
   disponibilidadesPure: any[] | null = null;
 
-  constructor(public modalRef: MdbModalRef<ModalComponent>) {}
+  constructor( private localStorageService: LocalStorageService, public modalRef: MdbModalRef<ModalComponent>, private router : Router, private http: HttpClient) {}
 
   disp: any[] = [];
+  token: string = "";
+  alunoId: any;
+  isAlunoLogado: boolean = false;
 
   ngOnInit(): void {
-    if (this.professor?.disponibilidade) {
-      this.disponibilidades = this.professor.disponibilidade;
+    if (this.professor?.disponibilidades) {
+      this.disponibilidades = this.professor.disponibilidades;
       this.disponibilidadesPure = this.disponibilidades;
       this.disponibilidades.forEach((disponibilidade) => {
         this.disp.push({
+          dataInicioPure: new Date(disponibilidade.dataInicio),
+          dataFimPure: new Date(disponibilidade.dataFim),
           dataInicio: this.formatarData(new Date(disponibilidade.dataInicio)),
           dataFim: this.formatarData(new Date(disponibilidade.dataFim))
         })
       });
+    }
+
+    this.token = this.localStorageService.get("token")
+    let type = this.localStorageService.get("type")
+    if(type == "aluno"){
+      this.alunoId = this.localStorageService.get("pessoaID")
+      if(this.alunoId != null){
+        this.isAlunoLogado = true;
+      }
     }
   }
 
@@ -49,8 +66,22 @@ export class ModalComponent implements OnInit {
     return dataFormatada;
   }
 
-  agendar(professor : Professor, data : String){
-    console.log(professor)
-    console.log(data)
+  agendar(professor : any, disponibilidade : any){
+    let startDate = new Date(disponibilidade.dataInicioPure).toLocaleString("pt-BR", {timeZone: "America/Recife"});
+    let endDate = new Date(disponibilidade.dataFimPure).toLocaleString("pt-BR", {timeZone: "America/Recife"});
+    let d ={
+      dataInicio: startDate,
+      dataFim: endDate,
+    }
+    this.http
+        .post<any>('http://localhost:8080' + '/aluno/agendar', {
+          professorId: professor.codigo,
+          disponibilidade: d,
+        }, {
+          headers: {
+            'Authorization': this.localStorageService.get("tokenType") + this.localStorageService.get("token")}
+        })
+        .subscribe((data) => {
+        });
   }
 }

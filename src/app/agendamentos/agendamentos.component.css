@@ -1,0 +1,68 @@
+/* From uiverse.io by @satyamchaudharydev */
+/* this card is inspired form this - https://georgefrancis.dev/ */
+h6{
+  font-size: 0.9rem;
+}
+
+.card-title{
+  font-weight: bold;
+}
+
+.bgRed{
+  background-color: rgba(255, 27, 27, 0.406);
+}
+
+.bgGreen{
+  background-color: rgb(129, 236, 122);
+}
+
+.bgBlue{
+  background-color: rgba(0, 0, 255, 0.467);
+}
+
+.bgYellow{
+  background-color: rgba(255, 255, 0, 0.598);
+}
+
+.card__delet{
+  position: absolute;
+    background: #7257fa;
+    padding: 0.4rem;
+    border-top-left-radius: 0.3rem;
+    border-bottom-right-radius: 0.3rem;
+    top: 0;
+    right: 0;
+    transition: 0.2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.card__arrow {
+    position: absolute;
+    background: #7257fa;
+    padding: 0.4rem;
+    border-top-left-radius: 0.3rem;
+    border-bottom-right-radius: 0.3rem;
+    bottom: 0;
+    right: 0;
+    transition: 0.2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .card svg {
+    transition: 0.2s;
+  }
+  
+  .card__arrow:hover {
+    background: #111;
+  }
+
+  .card__delet:hover {
+    background: rgb(255, 0, 0);
+  }
+  
+  .card__arrow:hover svg {
+    transform: translateX(3px);
+  }

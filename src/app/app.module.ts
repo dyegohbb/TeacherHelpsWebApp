@@ -11,11 +11,15 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CompartilhadoService } from './compartilhado.service';
 import { AlunosModule } from './alunos/alunos.module';
+import { AgendamentosComponent } from './agendamentos/agendamentos.component';
+import { DisponibilidadesComponent } from './disponibilidades/disponibilidades.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ModalComponent,
+    AgendamentosComponent,
+    DisponibilidadesComponent,
   ],
   imports: [
     AppRoutingModule,

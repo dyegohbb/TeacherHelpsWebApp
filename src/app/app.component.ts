@@ -12,10 +12,14 @@ import { CompartilhadoService } from 'src/app/compartilhado.service';
 })
 export class AppComponent implements OnInit {
   isLogado: boolean = false;
+  loginType: string = "";
   constructor(private localStorageService: LocalStorageService, private router : Router, private _sharedService: CompartilhadoService) {
     _sharedService.changeEmitted$.subscribe(text => {
       if(text == "isLogado"){
         this.isLogado = true;
+      }else{
+        this.loginType = text;
+        console.log(text)
       }
   });
   }
@@ -25,13 +29,14 @@ export class AppComponent implements OnInit {
   }
 
   logout(){
-    this.localStorageService.set('token','')
     this.isLogado = false;
+    this.localStorageService.clear();
     this.router.navigate(['/login'])
   }
 
   ngOnInit(): void {
     // this.localStorageService.set('tokenExpiration', '')
+    this.loginType = this.localStorageService.get("type");
     let date = new Date(this.localStorageService.get('tokenExpiration'));
     let token = this.localStorageService.get('token');
     if (date > new Date() && token != '') {
@@ -39,5 +44,9 @@ export class AppComponent implements OnInit {
     }else{
       this.isLogado = false;
     }
+    if(!this.isLogado){
+      this.localStorageService.clear();
+    }
+
   }
 }

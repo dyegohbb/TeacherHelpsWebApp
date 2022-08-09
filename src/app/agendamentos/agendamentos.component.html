@@ -1,0 +1,48 @@
+<div style="min-height: 20rem; width: 50rem; "
+    class="album py-5 container d-flex justify-content-between">
+    <div class="container">
+        <div class="d-flex column justify-content-center" *ngIf="modalErro">
+            <h5>Apenas agendamentos disponíveis podem ser confirmados</h5>
+            <a (click)="closeModalError()"><h5>&nbsp;[X]</h5></a>
+        </div>
+        <div class="d-flex column justify-content-center" *ngIf="semAgendamento">
+            <h5>Nenhum agendamento encontrado.</h5>
+        </div>
+        <div class="row justify-content-between">
+            <div *ngFor="let agendamento of agendamentos" [ngClass]="{'bgRed': agendamento.status === 'atrasado', 'bgYellow': agendamento.status === 'agendado', 'bgGreen': agendamento.status === 'disponivel',  'bgBlue': agendamento.status === 'confirmado'}" class="card col-sm-3 m-3 justify-content-center" style="height: 17rem; min-width: 11rem;">
+                <div class="card__delet ">
+                    <a (click)="deletar(agendamento)">
+                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="15" height="15" viewBox="0 0 24 24" style=" fill:#ffffff;">
+                            <path d="M 10 2 L 9 3 L 4 3 L 4 5 L 5 5 L 5 20 C 5 20.522222 5.1913289 21.05461 5.5683594 21.431641 C 5.9453899 21.808671 6.4777778 22 7 22 L 17 22 C 17.522222 22 18.05461 21.808671 18.431641 21.431641 C 18.808671 21.05461 19 20.522222 19 20 L 19 5 L 20 5 L 20 3 L 15 3 L 14 2 L 10 2 z M 7 5 L 17 5 L 17 20 L 7 20 L 7 5 z M 9 7 L 9 18 L 11 18 L 11 7 L 9 7 z M 13 7 L 13 18 L 15 18 L 15 7 L 13 7 z"></path>
+                        </svg>
+                    </a>
+                    
+                </div>
+                <div class="d-flex row mt-1">
+                    <h6 class="card-title">Status:</h6>
+                    <h6>{{agendamento.status}}</h6>
+                    <h6 class="card-title">Data/hora inicial:</h6>
+                    <h6>{{agendamento.disponibilidade.dataInicioView}}</h6>
+                    <h6 class="card-title">Data/hora final:</h6>
+                    <h6>{{agendamento.disponibilidade.dataFimView}}</h6>
+                    <h6 class="card-title" *ngIf="loginType == 'aluno'">Nome do professor:</h6>
+                    <h6 *ngIf="loginType == 'aluno'">{{agendamento.nomeProfessor}}</h6>
+                    <h6 class="card-title" *ngIf="loginType == 'professor'">Nome do aluno:</h6>
+                    <h6 *ngIf="loginType == 'professor'">{{agendamento.nomeAluno}}</h6>
+                    <h6 class="card-title">Valor por hora:</h6>
+                    <h6> $C {{agendamento.valorPorHora}}</h6>
+                </div>
+                
+                <div class="card__arrow ">
+                    <a (click)="confirmar(agendamento)">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="15" width="15">
+                            <path fill="#fff"
+                                d="M13.4697 17.9697C13.1768 18.2626 13.1768 18.7374 13.4697 19.0303C13.7626 19.3232 14.2374 19.3232 14.5303 19.0303L20.3232 13.2374C21.0066 12.554 21.0066 11.446 20.3232 10.7626L14.5303 4.96967C14.2374 4.67678 13.7626 4.67678 13.4697 4.96967C13.1768 5.26256 13.1768 5.73744 13.4697 6.03033L18.6893 11.25H4C3.58579 11.25 3.25 11.5858 3.25 12C3.25 12.4142 3.58579 12.75 4 12.75H18.6893L13.4697 17.9697Z">
+                            </path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
