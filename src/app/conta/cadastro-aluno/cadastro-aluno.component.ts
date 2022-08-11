@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AlunoService } from 'src/app/alunos/aluno/aluno.service';
 
 @Component({
@@ -8,7 +9,7 @@ import { AlunoService } from 'src/app/alunos/aluno/aluno.service';
 })
 export class CadastroAlunoComponent implements OnInit {
 
-  constructor(private alunoService: AlunoService) { }
+  constructor(private alunoService: AlunoService, private router : Router) { }
 
   aluno: any = {
     nome: "",
@@ -20,7 +21,9 @@ export class CadastroAlunoComponent implements OnInit {
 
 
   salvar(){
-    this.alunoService.save(this.aluno).subscribe();
+    this.alunoService.save(this.aluno).subscribe(() => {
+      this.router.navigate(['/login'])
+    });
   }
 
   ngOnInit(): void {

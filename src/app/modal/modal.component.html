@@ -9,15 +9,27 @@
   </div>
   <div class="modal-body">
     <div class="d-flex flex-column align-items-center justify-content-center">
-        <p>Sobre: {{ professor.sobre }}</p>
-        <p>Disciplina: {{ professor.disciplina }}</p>
-        <p>E-mail: {{ professor.email }}</p>
-        <p>Valor: $C {{ professor.valorPorHora }}/h</p>
+      <div style="max-width: 30rem; overflow: hidden; text-align: center;">
+        <h6>Sobre:</h6>
+        <p>{{professor.sobre}}</p>
+      </div>
+      <h6>Disciplina:</h6>
+        <p> {{ professor.disciplina }}</p>
+        <h6>E-mail:</h6>
+        <p> {{ professor.email }}</p>
+        <h6>Valor:</h6>
+        <p> $C {{ professor.valorPorHora }}/h</p>
     </div>
-    <div *ngIf="isAlunoLogado" class="d-flex flex-column align-items-center justify-content-center">
-        <p>Disponibilidade:</p>
+    <div *ngIf="isAlunoLogado && !this.modalError" class="d-flex flex-column align-items-center justify-content-center">
+        <h6>Disponibilidade:</h6>
         <span *ngFor="let disponibilidade of disp"><a (click)="agendar(professor, disponibilidade)">{{ disponibilidade.dataInicio }} ~ {{ disponibilidade.dataFim }}</a></span>
     </div>
+    <div *ngIf="isAlunoLogado && this.modalError" class="d-flex flex-column align-items-center justify-content-center">
+      <p class="mb-0">Você não tem Student Coins($C) suficiente para agendar</p>
+      <p>Saiba como comprar mais aqui:</p>
+      <a class="proximo me-4" (click)="goToSobre()">Sobre</a>
+      <span *ngFor="let disponibilidade of disp"><a (click)="agendar(professor, disponibilidade)">{{ disponibilidade.dataInicio }} ~ {{ disponibilidade.dataFim }}</a></span>
+  </div>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-secondary" (click)="modalRef.close()">

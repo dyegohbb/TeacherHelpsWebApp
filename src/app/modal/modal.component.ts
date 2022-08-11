@@ -1,4 +1,5 @@
 import { HttpClient } from '@angular/common/http';
+import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { data } from 'jquery';
@@ -12,9 +13,11 @@ import { Professor } from '../professores/professor/professor';
   templateUrl: './modal.component.html',
 })
 export class ModalComponent implements OnInit {
+  aluno: any;
   professor: Professor | any = {};
   disponibilidades: any[] = [];
   disponibilidadesPure: any[] | null = null;
+  modalError: boolean = false; 
 
   constructor( private localStorageService: LocalStorageService, public modalRef: MdbModalRef<ModalComponent>, private router : Router, private http: HttpClient) {}
 
@@ -24,7 +27,13 @@ export class ModalComponent implements OnInit {
   isAlunoLogado: boolean = false;
 
   ngOnInit(): void {
-    if (this.professor?.disponibilidades) {
+    if(this.aluno){
+      if(this.aluno.carteira < this.professor.valorPorHora){
+        this.modalError = true;
+        console.log("tenho grana n fi")
+      }
+    }
+    if (this.professor?.disponibilidades && !this.modalError) {
       this.disponibilidades = this.professor.disponibilidades;
       this.disponibilidadesPure = this.disponibilidades;
       this.disponibilidades.forEach((disponibilidade) => {
@@ -66,6 +75,11 @@ export class ModalComponent implements OnInit {
     return dataFormatada;
   }
 
+  goToSobre() {
+    this.modalRef.close()
+    this.router.navigate(["/sobre"])
+  }
+
   agendar(professor : any, disponibilidade : any){
     let startDate = new Date(disponibilidade.dataInicioPure).toLocaleString("pt-BR", {timeZone: "America/Recife"});
     let endDate = new Date(disponibilidade.dataFimPure).toLocaleString("pt-BR", {timeZone: "America/Recife"});
@@ -82,6 +96,8 @@ export class ModalComponent implements OnInit {
             'Authorization': this.localStorageService.get("tokenType") + this.localStorageService.get("token")}
         })
         .subscribe((data) => {
+          this.modalRef.close()
+          this.router.navigate(['/agendamentos'])
         });
   }
 }

@@ -13,6 +13,7 @@ import { CompartilhadoService } from './compartilhado.service';
 import { AlunosModule } from './alunos/alunos.module';
 import { AgendamentosComponent } from './agendamentos/agendamentos.component';
 import { DisponibilidadesComponent } from './disponibilidades/disponibilidades.component';
+import { CarteiraComponent } from './carteira/carteira.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { DisponibilidadesComponent } from './disponibilidades/disponibilidades.c
     ModalComponent,
     AgendamentosComponent,
     DisponibilidadesComponent,
+    CarteiraComponent,
   ],
   imports: [
     AppRoutingModule,

@@ -22,9 +22,8 @@ export class AgendamentosComponent implements OnInit {
     this.agendamentoId = agendamento.codigo.toString()
     if(agendamento.status != "disponivel"){
       this.modalErro = true;
-    }
-    console.log(this.agendamentoId)
-    this.http.get<any>('http://localhost:8080/agendamentos/confirmar',{
+    }else{
+      this.http.get<any>('http://localhost:8080/agendamentos/confirmar',{
         headers: {
           'Authorization': this.localStorageService.get("tokenType") + this.localStorageService.get("token"),
           'agendamentoId': this.agendamentoId,
@@ -32,26 +31,27 @@ export class AgendamentosComponent implements OnInit {
       }).subscribe(data => {
         agendamento.status = data.status;
       })
+    }
   }
 
-  deletar = (agendamento:any) => {
+  reembolso = (agendamento:any) => {
     console.log(this.agendamentos)
     console.log(agendamento)
     this.agendamentoId = agendamento.codigo.toString()
-    this.http.get<any>('http://localhost:8080/agendamentos/deletar',{
+    this.http.get<any>('http://localhost:8080/agendamentos/reembolso',{
         headers: {
           'Authorization': this.localStorageService.get("tokenType") + this.localStorageService.get("token"),
           'agendamentoId': this.agendamentoId,
         }
       }).subscribe(() => {
-        console.log("oi abc")
-        let index = this.agendamentos.indexOf(agendamento)
-        console.log(agendamento)
-        console.log(index)
-        if(index > -1){
-          this.agendamentos.splice(index, 1);
-        }
-        console.log(this.agendamentos)
+        agendamento.status = "reembolsado"
+        // let index = this.agendamentos.indexOf(agendamento)
+        // console.log(agendamento)
+        // console.log(index)
+        // if(index > -1){
+        //   this.agendamentos.splice(index, 1);
+        // }
+        // console.log(this.agendamentos)
       })
   }
 

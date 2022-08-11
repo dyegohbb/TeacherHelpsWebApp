@@ -9,11 +9,11 @@
             <h5>Nenhum agendamento encontrado.</h5>
         </div>
         <div class="row justify-content-between">
-            <div *ngFor="let agendamento of agendamentos" [ngClass]="{'bgRed': agendamento.status === 'atrasado', 'bgYellow': agendamento.status === 'agendado', 'bgGreen': agendamento.status === 'disponivel',  'bgBlue': agendamento.status === 'confirmado'}" class="card col-sm-3 m-3 justify-content-center" style="height: 17rem; min-width: 11rem;">
-                <div class="card__delet ">
-                    <a (click)="deletar(agendamento)">
-                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="15" height="15" viewBox="0 0 24 24" style=" fill:#ffffff;">
-                            <path d="M 10 2 L 9 3 L 4 3 L 4 5 L 5 5 L 5 20 C 5 20.522222 5.1913289 21.05461 5.5683594 21.431641 C 5.9453899 21.808671 6.4777778 22 7 22 L 17 22 C 17.522222 22 18.05461 21.808671 18.431641 21.431641 C 18.808671 21.05461 19 20.522222 19 20 L 19 5 L 20 5 L 20 3 L 15 3 L 14 2 L 10 2 z M 7 5 L 17 5 L 17 20 L 7 20 L 7 5 z M 9 7 L 9 18 L 11 18 L 11 7 L 9 7 z M 13 7 L 13 18 L 15 18 L 15 7 L 13 7 z"></path>
+            <div *ngFor="let agendamento of agendamentos" [ngClass]="{'bgRed': agendamento.status === 'atrasado', 'bgYellow': agendamento.status === 'agendado', 'bgGreen': agendamento.status === 'disponivel',  'bgBlue': agendamento.status === 'confirmado', 'bgGray': agendamento.status === 'reembolsado'}" class="card col-sm-3 m-3 justify-content-center" style="height: 17rem; min-width: 11rem;">
+                <div *ngIf="agendamento.status !== 'reembolsado' && agendamento.status !== 'confirmado'" class="card__delet ">
+                    <a (click)="reembolso(agendamento)" title="Reembolso">
+                        <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M12.3 8.93L9.88 6.5H15.5V10H17V5H9.88L12.3 2.57L11.24 1.5L7 5.75L11.24 10L12.3 8.93M12 14A3 3 0 1 0 15 17A3 3 0 0 0 12 14M3 11V23H21V11M19 19A2 2 0 0 0 17 21H7A2 2 0 0 0 5 19V15A2 2 0 0 0 7 13H17A2 2 0 0 0 19 15Z" />
                         </svg>
                     </a>
                     
@@ -34,7 +34,7 @@
                 </div>
                 
                 <div class="card__arrow ">
-                    <a (click)="confirmar(agendamento)">
+                    <a (click)="confirmar(agendamento)" title="Confirmar agendamento">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="15" width="15">
                             <path fill="#fff"
                                 d="M13.4697 17.9697C13.1768 18.2626 13.1768 18.7374 13.4697 19.0303C13.7626 19.3232 14.2374 19.3232 14.5303 19.0303L20.3232 13.2374C21.0066 12.554 21.0066 11.446 20.3232 10.7626L14.5303 4.96967C14.2374 4.67678 13.7626 4.67678 13.4697 4.96967C13.1768 5.26256 13.1768 5.73744 13.4697 6.03033L18.6893 11.25H4C3.58579 11.25 3.25 11.5858 3.25 12C3.25 12.4142 3.58579 12.75 4 12.75H18.6893L13.4697 17.9697Z">

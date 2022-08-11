@@ -7,11 +7,11 @@
     <div class="container-fluid d-flex justify-content-around">
       <ul class="nav navbar-nav border">
         <li><a id="len1" class="hoverable ms-3 me-3" (click)="goTo('/')">Inicio</a></li>
+        <li><a *ngIf="isLogado" id="len3" class="hoverable ms-3 me-3" (click)="goTo('/conta')">Conta</a></li>
         <li><a *ngIf="isLogado" id="len3" class="hoverable ms-3 me-3" (click)="goTo('/agendamentos')">Agendamentos</a></li>
         <li><a *ngIf="isLogado && loginType == 'professor'" id="len3" class="hoverable ms-3 me-3" (click)="goTo('/disponibilidades')">Disponibilidades</a></li>
         <li><a id="len2" class="hoverable ms-3 me-3" (click)="goTo('/sobre')">Sobre</a></li>
         <li><a *ngIf="!isLogado" id="len3" class="hoverable ms-3 me-3" (click)="goTo('/login')">Login/Cadastro</a></li>
-        <li><a id="len4" class="hoverable ms-3 me-3" (click)="goTo('/contato')">Fale conosco</a></li>
         <li><a *ngIf="isLogado" id="len4" class="hoverable ms-3 me-3" (click)="logout()">Sair</a></li>
       </ul>
     </div>

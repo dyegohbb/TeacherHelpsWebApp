@@ -1,0 +1,33 @@
+<div style="min-height: 20rem; width: 50rem; " class="album mt-4 container d-flex justify-content-between">
+    <div class="container d-flex flex-column align-items-center">
+        <div *ngIf="!loading">
+            <p>
+                Nome: {{pessoa.nome}}
+            </p>
+            <p>
+                CPF: {{pessoa.cpf}}
+            </p>
+            <p>
+                Telefone: {{pessoa.telefone}}
+            </p>
+            <p>
+                E-mail: {{pessoa.email}}
+            </p>
+            <p>
+                Carteira: $C {{pessoa.carteira}} 
+            </p>
+            <p *ngIf="type == 'professor'">
+                Valor por hora: {{pessoa.valorPorHora}}
+            </p>
+            <p *ngIf="type == 'professor'">
+                Sobre: {{pessoa.sobre}}
+            </p>
+            <p *ngIf="type == 'professor'">
+                Disciplina: {{pessoa.disciplina}}
+            </p>
+            <p *ngIf="type == 'professor'">
+                Disponibilidade: <a clas="link" (click)="goTo('/disponibilidades')">Clique Aqui</a>
+            </p>
+        </div>
+    </div>
+</div>

@@ -20,17 +20,39 @@ export class DisponibilidadesComponent implements OnInit {
   constructor(private http: HttpClient, private localStorageService: LocalStorageService, private router : Router) { }
 
   adicionarDisponibilidade = () =>{
-    if(this.horaInicial != null){
+    if(this.horaInicial != null && this.horaInicial != ""){
       let dateFinal = new Date(this.horaInicial) 
       dateFinal.setHours(dateFinal.getHours() + 1)
       let dateFinalFormatted = dateFinal.getFullYear() + "-" + (dateFinal.getMonth() + 1).toString().padStart(2, "0") + "-" + dateFinal.getDate().toString().padStart(2, "0") + "T" + dateFinal.getHours().toString().padStart(2, "0") + ":" + dateFinal.getMinutes().toString().padStart(2, "0") + ":00";
-      this.disponibilidades.push({
+
+      let disp = {
         dataInicio: this.horaInicial.toString() + ":00",
         dataFim: dateFinalFormatted
-      })
-      this.alterou = true
+      }
+
+      let duplicado = false;
+      this.disponibilidades.forEach(disponibilidade => {
+        if(disponibilidade.dataInicio == disp.dataInicio){
+          duplicado = true;
+        }
+      });
+
+      if(!duplicado){
+        this.disponibilidades.push(disp)
+        this.alterou = true
+      }else{
+        console.log("duplicado bb")
+      }
+      this.horaInicial = ""
     }
   }
+
+
+  removerDisponibilidade(disponibilidade : any){
+    console.log(disponibilidade)
+    let tempDisp = this.disponibilidades.filter( (disp) => disp !== disponibilidade)
+    this.disponibilidades = tempDisp;
+   }
 
   enviarDisponibilidades = () => {
     if(this.alterou){

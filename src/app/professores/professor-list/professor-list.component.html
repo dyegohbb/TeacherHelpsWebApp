@@ -1,21 +1,24 @@
-<form class="form-inline d-flex justify-content-center mt-4">
-  <div style="width: 15%">
-    <input
-      class="form-control mr-sm-2"
-      type="search"
-      placeholder="O que você quer aprender?"
-      aria-label="Search"
-    />
-  </div>
-  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-    Search
-  </button>
-</form>
-<div class="album py-5">
+<div class="album py-4">
   <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-sm-3" *ngFor="let professor of professores">
+    <div class="row justify-content-start">
+      <div  class="col-sm-2" style="cursor: pointer;" *ngFor="let professor of professores" (click)="openModal(professor)">
         <div class="card mb-4">
+          <div class="card-info">
+            <p class="title">{{professor.nome}}</p>
+            <p class="subtitle">{{professor.disciplina}}</p>
+          </div>
+          <div class="card-bio">
+            <p>$C {{professor.valorPorHora}}/h</p>
+            <div style="max-width: 10rem; max-height: 5rem; overflow: hidden; text-overflow: ellipsis">
+              <h6>Sobre:</h6>
+              <p style="text-overflow: ellipsis">{{professor.sobre}}</p>
+            </div>
+            
+            <span class="span-card">Mais detalhes</span>
+          </div>
+        </div>
+
+        <!-- <div class="card mb-4">
           <img
             class="card-img-top"
             data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail"
@@ -39,7 +42,7 @@
               <small class="text-muted">$C {{professor.valorPorHora}}/h</small>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
